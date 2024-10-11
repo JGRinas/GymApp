@@ -3,7 +3,7 @@ import BackgroundImage from "@shared/ui/BackgroundImage";
 import { Banner } from "@shared/ui/Banner";
 import { Button } from "@shared/ui/Button";
 import { InputContainer as ButtonContainer } from "@shared/ui/InputContainer";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 function OnBoarding() {
   return (
