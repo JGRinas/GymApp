@@ -5,8 +5,9 @@ import { RedHatText_400Regular } from "@expo-google-fonts/red-hat-text";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import CustomHeader from "@shared/ui/CutomHeader";
+import { StatusBar } from "react-native";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -26,9 +27,17 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#000"
+        translucent={false}
+      />
+      <Stack
+        screenOptions={{
+          header: () => <CustomHeader />,
+        }}
+      />
+    </>
   );
 }

@@ -1,15 +1,15 @@
 interface IColors {
-  primary: string;
-  secondary: string;
-  tertiary: string;
-  quaternary: string;
-  gray: string;
+  PRIMARY: string;
+  SECONDARY: string;
+  TERTIARY: string;
+  QUATERNARY: string;
+  GRAY: string;
 }
 
 export const colors: IColors = {
-  primary: "#E6FE58",
-  secondary: "#171717",
-  tertiary: "#000000",
-  quaternary: "#D8D5D5",
-  gray: "#D9D9D966",
+  PRIMARY: "#E6FE58",
+  SECONDARY: "#171717",
+  TERTIARY: "#000000",
+  QUATERNARY: "#D8D5D5",
+  GRAY: "#D9D9D966",
 };
