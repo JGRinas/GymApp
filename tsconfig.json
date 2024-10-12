@@ -6,7 +6,8 @@
       "@constansts/*": ["./src/constants/*"],
       "@shared/*": ["./src/modules/shared/*"],
       "@assets/*": ["./src/assets/*"],
-      "@colors/*": ["./src/config/*"],
+      "@colors/*": ["./src/config/theme/colors"],
+      "@config/*": ["./src/config/*"],
     }
   },
   "include": [

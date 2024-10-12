@@ -1,4 +1,4 @@
-import { colors } from "@colors/theme/colors";
+
 import React from "react";
 import {
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { BaseText } from "./Texts";
+import { colors } from "@colors/*";
 
 interface IButton {
   text: string;

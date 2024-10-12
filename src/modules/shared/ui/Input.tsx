@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput, StyleSheet, View } from "react-native";
 import { BaseText } from "./Texts";
-import { colors } from "@colors/theme/colors";
+import { colors } from "@colors/*";
 
 interface IInput {
   placeholder: string;

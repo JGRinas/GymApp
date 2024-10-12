@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { colors } from "@colors/theme/colors";
 import { BaseText } from "./Texts";
+import { colors } from "@colors/*";
 
 interface IBanner {
   text: string;
