@@ -2,11 +2,11 @@ import { z } from "zod";
 
 export const signUpSchema = z
   .object({
-    firstname: z
+    name: z
       .string({ required_error: "required" })
       .trim()
       .min(1, { message: "required" }),
-    lastname: z
+    last_name: z
       .string({ required_error: "required" })
       .trim()
       .min(1, { message: "required" }),

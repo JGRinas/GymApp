@@ -12,8 +12,8 @@ import { signUpSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const fields = [
-  { name: "firstname", placeholder: "NOMBRE" },
-  { name: "lastname", placeholder: "APELLIDO" },
+  { name: "name", placeholder: "NOMBRE" },
+  { name: "last_name", placeholder: "APELLIDO" },
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
   { name: "password", placeholder: "CONTRASEÑA", type: "password" },
   {
