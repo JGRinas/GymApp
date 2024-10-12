@@ -27,3 +27,14 @@ export const signUpSchema = z
     path: ["passwordConfirmation"],
     message: "Las contraseñas deben coincidir",
   });
+
+export const signInSchema = z.object({
+  email: z
+    .string({ required_error: "required" })
+    .email("value")
+    .min(1, { message: "required" }),
+  password: z
+    .string({ required_error: "required", invalid_type_error: "value" })
+    .trim()
+    .min(1, { message: "required" }),
+});

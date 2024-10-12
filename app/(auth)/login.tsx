@@ -8,8 +8,8 @@ import { Button } from "@shared/ui/Button";
 import { Input } from "@shared/ui/Input";
 import { InputContainer } from "@shared/ui/InputContainer";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import { SignUp } from "../../src/modules/auth/domain";
-import { signUpSchema } from "../../src/modules/auth/domain/schemas";
+import { SignIn } from "../../src/modules/auth/domain";
+import { signInSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const fields = [
@@ -18,8 +18,8 @@ const fields = [
 ];
 
 const Login = () => {
-  const methods = useForm<SignUp>({
-    resolver: zodResolver(signUpSchema),
+  const methods = useForm<SignIn>({
+    resolver: zodResolver(signInSchema),
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   });
