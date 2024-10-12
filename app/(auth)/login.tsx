@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const fields = [
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
-  { name: "password", placeholder: "CONTRASEÑA" },
+  { name: "password", placeholder: "CONTRASEÑA", type: "password" },
 ];
 
 const Login = () => {
@@ -39,6 +39,9 @@ const Login = () => {
                       placeholder={item.placeholder}
                       onChangeText={field.onChange}
                       value={field.value}
+                      error={!!error}
+                      errorMessage={`${error?.message}`}
+                      secureField={item.type === "password"}
                     />
                   )}
                 />

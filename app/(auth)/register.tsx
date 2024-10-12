@@ -15,8 +15,12 @@ const fields = [
   { name: "firstname", placeholder: "NOMBRE" },
   { name: "lastname", placeholder: "APELLIDO" },
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
-  { name: "password", placeholder: "CONTRASEÑA" },
-  { name: "passwordConfirmation", placeholder: "CONFIRMAR CONTRASEÑA" },
+  { name: "password", placeholder: "CONTRASEÑA", type: "password" },
+  {
+    name: "passwordConfirmation",
+    placeholder: "CONFIRMAR CONTRASEÑA",
+    type: "password",
+  },
 ];
 
 const Register = () => {
@@ -41,6 +45,9 @@ const Register = () => {
                       placeholder={item.placeholder}
                       onChangeText={field.onChange}
                       value={field.value}
+                      error={!!error}
+                      errorMessage={`${error?.message}`}
+                      secureField={item.type === "password"}
                     />
                   )}
                 />

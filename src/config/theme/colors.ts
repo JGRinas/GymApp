@@ -4,6 +4,7 @@ interface IColors {
   TERTIARY: string;
   QUATERNARY: string;
   GRAY: string;
+  ERROR: string;
 }
 
 export const colors: IColors = {
@@ -12,4 +13,5 @@ export const colors: IColors = {
   TERTIARY: "#000000",
   QUATERNARY: "#D8D5D5",
   GRAY: "#D9D9D966",
+  ERROR: "#FF3300",
 };
