@@ -11,6 +11,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignIn } from "../../src/modules/auth/domain";
 import { signInSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "../../src/modules/auth/infrastructure/hooks/useAuth";
 
 const fields = [
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
@@ -23,6 +24,11 @@ const Login = () => {
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   });
+
+  const { mutateAsync: signIn } = useLogin();
+
+  const onSubmit = methods.handleSubmit(async (data) => await signIn(data));
+
   return (
     <BackgroundImage>
       <View style={styles.container}>
@@ -46,10 +52,7 @@ const Login = () => {
                   )}
                 />
               ))}
-              <Button
-                text="INICIAR SESIÓN"
-                handlePress={() => methods.handleSubmit(() => {})}
-              />
+              <Button text="INICIAR SESIÓN" handlePress={onSubmit} />
             </InputContainer>
           </FormProvider>
         </View>

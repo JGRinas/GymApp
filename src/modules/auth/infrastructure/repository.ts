@@ -1,21 +1,20 @@
 import { API } from "@config/axios";
 import { AuthRepository } from "../domain/repository";
-import { SignIn, SignUp } from "../domain";
+import { LoginResponse, SignIn, SignUp } from "../domain";
 
 export default function createAuthRepository(): AuthRepository {
   return {
     login,
     register,
+    getProfile,
   };
 }
 
-async function login({ email, password }: SignIn) {
-  const response = await API.AUTH.post<any>("/login", {
-    email: email.trim(),
-    password: password.trim(),
-  });
+async function login(data: SignIn) {
+  const response = await API.AUTH.post<LoginResponse>("/login", data);
   return response.data;
 }
+
 async function register({
   email,
   name,
@@ -30,5 +29,10 @@ async function register({
     password: password.trim(),
     passwordConfirmation: passwordConfirmation.trim(),
   });
+  return response.data;
+}
+
+async function getProfile() {
+  const response = await API.USER.get("/profile");
   return response.data;
 }
