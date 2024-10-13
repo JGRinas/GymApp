@@ -5,26 +5,28 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import Constants from "expo-constants";
+import { getJWT } from "../modules/auth/infrastructure/token";
 
 const BASE_URL_GYM_APP = process.env.EXPO_PUBLIC_GYM_APP_API_URL;
 
 // --- Handlers ---
 const requestHandler = async (request: InternalAxiosRequestConfig) => {
   try {
-    //@ts-ignore
+    const token = await getJWT();
+    if (token) request.headers.Authorization = `Bearer ${token}`;
+
     request.headers.set("x-api-key", process.env.EXPO_PUBLIC_APIKEY);
     const userAgent = await Constants.getWebViewUserAgentAsync();
-    //@ts-ignore
     request.headers.set("user-agent", userAgent);
-  } catch {
-    console.error("error on set request headers");
+  } catch (error) {
+    console.error("Error al configurar los headers de la petición", error);
   }
   return request;
 };
 
 const responseHandler = (response: AxiosResponse) => {
   if (response.status === 401) {
-    //TODO: Should redirect to /login
+    console.warn("Token expirado o no válido, redirigiendo a login...");
   }
   return response;
 };
@@ -65,11 +67,12 @@ function addInterceptors(instance: AxiosInstance) {
   );
 }
 
-type InstanceType = "AUTH";
+type InstanceType = "AUTH" | "USER";
 
 const PREFIX = {
   BASE_URL_GYM_APP,
   AUTH: process.env.EXPO_PUBLIC_PREFIX_AUTH,
+  USER: process.env.EXPO_PUBLIC_PREFIX_USER,
 };
 
 const createInstance = (type: InstanceType) => {
@@ -84,6 +87,7 @@ const createInstance = (type: InstanceType) => {
 
 const API = {
   AUTH: createInstance("AUTH"),
+  USER: createInstance("USER"),
 };
 
 export { API, PREFIX };

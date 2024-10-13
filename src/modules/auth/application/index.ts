@@ -12,3 +12,9 @@ export function login(repository: AuthRepository) {
     return await repository.login(data);
   };
 }
+
+export function getProfile(repository: AuthRepository) {
+  return async function () {
+    return await repository.getProfile();
+  };
+}
