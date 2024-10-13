@@ -3,10 +3,9 @@ import createAuthRepository from "../repository";
 import { createAccount, login } from "../../application";
 import { SignIn, SignUp } from "../../domain";
 import { saveJWT } from "../token";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { fetchUserInfo, signIn } from "../slices";
 import { useAppDispatch } from "@config/store";
-import { useRouter } from "expo-router";
 
 const authRepo = createAuthRepository();
 
