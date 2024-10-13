@@ -6,7 +6,7 @@ import axios, {
 } from "axios";
 import Constants from "expo-constants";
 
-const BASE_URL_GYM_APP = process.env.GYM_APP_API;
+const BASE_URL_GYM_APP = process.env.EXPO_PUBLIC_GYM_APP_API_URL;
 
 // --- Handlers ---
 const requestHandler = async (request: InternalAxiosRequestConfig) => {

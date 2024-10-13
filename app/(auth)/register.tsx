@@ -10,6 +10,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignUp } from "../../src/modules/auth/domain";
 import { signUpSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCreateAccount } from "../../src/modules/auth/infrastructure/hooks/useAuth";
 
 const fields = [
   { name: "name", placeholder: "NOMBRE" },
@@ -29,6 +30,8 @@ const Register = () => {
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   });
+  const { signUp } = useCreateAccount();
+  const onSubmit = methods.handleSubmit(async (data) => await signUp(data));
   return (
     <BackgroundImage>
       <View style={styles.container}>
@@ -54,7 +57,7 @@ const Register = () => {
               ))}
               <Button
                 text="REGISTRARSE"
-                handlePress={() => methods.handleSubmit(() => {})}
+                handlePress={onSubmit}
                 variant="secondary"
               />
             </InputContainer>
