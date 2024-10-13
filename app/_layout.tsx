@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import CustomHeader from "@shared/ui/CutomHeader";
 import { StatusBar } from "react-native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,8 +27,13 @@ export default function RootLayout() {
     return null;
   }
 
+  return <RootLayoutNav />;
+}
+
+function RootLayoutNav() {
+  const queryClient = new QueryClient();
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <StatusBar
         barStyle="light-content"
         backgroundColor="#000"
@@ -38,6 +44,6 @@ export default function RootLayout() {
           header: () => <CustomHeader />,
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 }
