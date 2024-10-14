@@ -22,7 +22,7 @@ const Login = () => {
   const methods = useForm<SignIn>({
     resolver: zodResolver(signInSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
+    reValidateMode: "onBlur",
   });
 
   const { mutateAsync: signIn } = useLogin();
@@ -46,7 +46,7 @@ const Login = () => {
                       onChangeText={field.onChange}
                       value={field.value}
                       error={!!error}
-                      errorMessage={`${error?.message}`}
+                      errorMessage={error?.message ?? ""}
                       secureField={item.type === "password"}
                     />
                   )}

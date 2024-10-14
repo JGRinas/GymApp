@@ -3,23 +3,29 @@ import { z } from "zod";
 export const signUpSchema = z
   .object({
     name: z
-      .string({ required_error: "required" })
+      .string({ required_error: "Campo requerido" })
       .trim()
       .min(1, { message: "required" }),
     last_name: z
-      .string({ required_error: "required" })
+      .string({ required_error: "Campo requerido" })
       .trim()
       .min(1, { message: "required" }),
     email: z
-      .string({ required_error: "required" })
-      .email("value")
+      .string({ required_error: "Campo requerido" })
+      .email("Ingrese un email válido")
       .min(1, { message: "required" }),
     password: z
-      .string({ required_error: "required", invalid_type_error: "value" })
+      .string({
+        required_error: "Campo requerido",
+        invalid_type_error: "value",
+      })
       .trim()
       .min(1, { message: "required" }),
     passwordConfirmation: z
-      .string({ required_error: "required", invalid_type_error: "value" })
+      .string({
+        required_error: "Campo requerido",
+        invalid_type_error: "value",
+      })
       .trim()
       .min(1, { message: "required" }),
   })
@@ -30,11 +36,11 @@ export const signUpSchema = z
 
 export const signInSchema = z.object({
   email: z
-    .string({ required_error: "required" })
-    .email("value")
+    .string({ required_error: "Campo requerido" })
+    .email("Ingrese un email válido")
     .min(1, { message: "required" }),
   password: z
-    .string({ required_error: "required", invalid_type_error: "value" })
+    .string({ required_error: "Campo requerido", invalid_type_error: "value" })
     .trim()
     .min(1, { message: "required" }),
 });

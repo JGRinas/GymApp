@@ -23,19 +23,23 @@ export const Input = ({
   aditionalStyle,
 }: IInput) => {
   return (
-    <View style={[styles.container, aditionalStyle]}>
-      <TextInput
-        secureTextEntry={secureField}
-        style={styles.input}
-        placeholder={placeholder}
-        placeholderTextColor="#FFF"
-        value={value}
-        onChangeText={onChangeText}
-      />
+    <>
+      <View
+        style={[styles.container, aditionalStyle, error && styles.errorBorder]}
+      >
+        <TextInput
+          secureTextEntry={secureField}
+          style={styles.input}
+          placeholder={placeholder}
+          placeholderTextColor="#FFF"
+          value={value}
+          onChangeText={onChangeText}
+        />
+      </View>
       {error && (
         <BaseText textStyles={styles.labelError}>{errorMessage}</BaseText>
       )}
-    </View>
+    </>
   );
 };
 
@@ -57,10 +61,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   labelError: {
-    fontSize: 8,
+    alignSelf: "flex-start",
+    fontSize: 10,
     fontWeight: "500",
-    lineHeight: 8,
-    paddingLeft: 5,
+    lineHeight: 10,
     color: colors.ERROR,
+  },
+  errorBorder: {
+    borderColor: colors.ERROR,
   },
 });

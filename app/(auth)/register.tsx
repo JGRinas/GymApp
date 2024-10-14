@@ -28,10 +28,13 @@ const Register = () => {
   const methods = useForm<SignUp>({
     resolver: zodResolver(signUpSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
+    reValidateMode: "onBlur",
   });
+
   const { signUp } = useCreateAccount();
+
   const onSubmit = methods.handleSubmit(async (data) => await signUp(data));
+
   return (
     <BackgroundImage>
       <View style={styles.container}>
@@ -41,15 +44,15 @@ const Register = () => {
             <InputContainer variant="secondary">
               {fields.map((item) => (
                 <Controller
-                  name={item.name}
                   key={item.name}
+                  name={item.name}
                   render={({ field, fieldState: { error } }) => (
                     <Input
                       placeholder={item.placeholder}
                       onChangeText={field.onChange}
                       value={field.value}
                       error={!!error}
-                      errorMessage={`${error?.message}`}
+                      errorMessage={error?.message ?? ""}
                       secureField={item.type === "password"}
                     />
                   )}
