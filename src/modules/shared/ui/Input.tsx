@@ -1,15 +1,16 @@
 import React from "react";
-import { TextInput, StyleSheet, View } from "react-native";
+import { TextInput, StyleSheet, View, ViewStyle } from "react-native";
 import { BaseText } from "./Texts";
 import { colors } from "@colors/*";
 
 interface IInput {
   placeholder: string;
   value: string;
-  error: boolean;
-  errorMessage: string;
+  error?: boolean;
+  errorMessage?: string;
   onChangeText: (text: string) => void;
   secureField?: boolean;
+  aditionalStyle?: ViewStyle;
 }
 
 export const Input = ({
@@ -19,9 +20,10 @@ export const Input = ({
   error,
   errorMessage,
   secureField,
+  aditionalStyle,
 }: IInput) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, aditionalStyle]}>
       <TextInput
         secureTextEntry={secureField}
         style={styles.input}
