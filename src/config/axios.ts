@@ -67,7 +67,7 @@ function addInterceptors(instance: AxiosInstance) {
   );
 }
 
-type InstanceType = "AUTH" | "USER" | "PLAN" | "ROUTINE";
+type InstanceType = "AUTH" | "USER" | "PLAN" | "ROUTINE" | "EXERCISE";
 
 const PREFIX = {
   BASE_URL_GYM_APP,
@@ -75,6 +75,7 @@ const PREFIX = {
   USER: process.env.EXPO_PUBLIC_PREFIX_USER,
   PLAN: process.env.EXPO_PUBLIC_PREFIX_PLAN,
   ROUTINE: process.env.EXPO_PUBLIC_PREFIX_ROUTINE,
+  EXERCISE: process.env.EXPO_PUBLIC_PREFIX_EXERCISE,
 };
 
 const createInstance = (type: InstanceType) => {
@@ -92,6 +93,7 @@ const API = {
   USER: createInstance("USER"),
   PLAN: createInstance("PLAN"),
   ROUTINE: createInstance("ROUTINE"),
+  EXERCISE: createInstance("EXERCISE"),
 };
 
 export { API, PREFIX };
