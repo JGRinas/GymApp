@@ -1,12 +1,13 @@
-import { colors } from "@colors/theme/colors";
 import React from "react";
 import {
+  ActivityIndicator,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import { BaseText } from "./Texts";
+import { colors } from "@colors/*";
 
 interface IButton {
   text: string;
@@ -15,6 +16,7 @@ interface IButton {
   disabled?: boolean;
   additionalStyles?: ViewStyle | ViewStyle[];
   textStyles?: TextStyle;
+  isLoading?: boolean;
 }
 
 export const Button = ({
@@ -24,6 +26,7 @@ export const Button = ({
   disabled,
   additionalStyles,
   textStyles,
+  isLoading = false,
 }: IButton) => (
   <TouchableOpacity
     style={[
@@ -35,7 +38,11 @@ export const Button = ({
     onPress={handlePress}
     disabled={disabled}
   >
-    <BaseText textStyles={textStyles}>{text}</BaseText>
+    {isLoading ? (
+      <ActivityIndicator size={20} />
+    ) : (
+      <BaseText textStyles={textStyles}>{text}</BaseText>
+    )}
   </TouchableOpacity>
 );
 

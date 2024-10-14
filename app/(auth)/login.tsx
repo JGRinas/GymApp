@@ -11,6 +11,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignIn } from "../../src/modules/auth/domain";
 import { signInSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "../../src/modules/auth/infrastructure/hooks/useAuth";
 
 const fields = [
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
@@ -21,8 +22,13 @@ const Login = () => {
   const methods = useForm<SignIn>({
     resolver: zodResolver(signInSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
+    reValidateMode: "onBlur",
   });
+
+  const { mutateAsync: signIn, isPending } = useLogin();
+
+  const onSubmit = methods.handleSubmit(async (data) => await signIn(data));
+
   return (
     <BackgroundImage>
       <View style={styles.container}>
@@ -40,7 +46,7 @@ const Login = () => {
                       onChangeText={field.onChange}
                       value={field.value}
                       error={!!error}
-                      errorMessage={`${error?.message}`}
+                      errorMessage={error?.message ?? ""}
                       secureField={item.type === "password"}
                     />
                   )}
@@ -48,7 +54,8 @@ const Login = () => {
               ))}
               <Button
                 text="INICIAR SESIÓN"
-                handlePress={() => methods.handleSubmit(() => {})}
+                handlePress={onSubmit}
+                isLoading={isPending}
               />
             </InputContainer>
           </FormProvider>

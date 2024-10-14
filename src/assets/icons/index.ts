@@ -4,6 +4,7 @@ export { default as SearchIcon } from "./Search.svg";
 export { default as UserIcon } from "./User.svg";
 export { default as WhatsAppIcon } from "./WhatsApp.svg";
 export { default as HomeIcon } from "./home.svg";
+export { default as EditIcon } from "./edit.svg";
 
 //logos
 export { default as LogoIcon } from "./logos/logo1.svg";

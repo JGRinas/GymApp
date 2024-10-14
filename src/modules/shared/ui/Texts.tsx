@@ -1,4 +1,4 @@
-import { colors } from "@colors/theme/colors";
+import { colors } from "@colors/*";
 import React, { ReactNode } from "react";
 import { StyleSheet, Text, TextStyle } from "react-native";
 

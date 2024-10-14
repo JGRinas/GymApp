@@ -1,3 +1,6 @@
+import React from "react";
+import { Stack } from "expo-router";
+
 export default function RoutineLayout() {
-  return <></>;
+  return <Stack screenOptions={{ headerShown: false }} />;
 }

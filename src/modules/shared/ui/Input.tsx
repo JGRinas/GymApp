@@ -1,15 +1,16 @@
 import React from "react";
-import { TextInput, StyleSheet, View } from "react-native";
+import { TextInput, StyleSheet, View, ViewStyle } from "react-native";
 import { BaseText } from "./Texts";
-import { colors } from "@colors/theme/colors";
+import { colors } from "@colors/*";
 
 interface IInput {
   placeholder: string;
   value: string;
-  error: boolean;
-  errorMessage: string;
+  error?: boolean;
+  errorMessage?: string;
   onChangeText: (text: string) => void;
   secureField?: boolean;
+  aditionalStyle?: ViewStyle;
 }
 
 export const Input = ({
@@ -19,21 +20,26 @@ export const Input = ({
   error,
   errorMessage,
   secureField,
+  aditionalStyle,
 }: IInput) => {
   return (
-    <View style={styles.container}>
-      <TextInput
-        secureTextEntry={secureField}
-        style={styles.input}
-        placeholder={placeholder}
-        placeholderTextColor="#FFF"
-        value={value}
-        onChangeText={onChangeText}
-      />
+    <>
+      <View
+        style={[styles.container, aditionalStyle, error && styles.errorBorder]}
+      >
+        <TextInput
+          secureTextEntry={secureField}
+          style={styles.input}
+          placeholder={placeholder}
+          placeholderTextColor="#FFF"
+          value={value}
+          onChangeText={onChangeText}
+        />
+      </View>
       {error && (
         <BaseText textStyles={styles.labelError}>{errorMessage}</BaseText>
       )}
-    </View>
+    </>
   );
 };
 
@@ -55,10 +61,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   labelError: {
-    fontSize: 8,
+    alignSelf: "flex-start",
+    fontSize: 10,
     fontWeight: "500",
-    lineHeight: 8,
-    paddingLeft: 5,
+    lineHeight: 10,
     color: colors.ERROR,
+  },
+  errorBorder: {
+    borderColor: colors.ERROR,
   },
 });

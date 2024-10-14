@@ -10,10 +10,11 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { SignUp } from "../../src/modules/auth/domain";
 import { signUpSchema } from "../../src/modules/auth/domain/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCreateAccount } from "../../src/modules/auth/infrastructure/hooks/useAuth";
 
 const fields = [
-  { name: "firstname", placeholder: "NOMBRE" },
-  { name: "lastname", placeholder: "APELLIDO" },
+  { name: "name", placeholder: "NOMBRE" },
+  { name: "last_name", placeholder: "APELLIDO" },
   { name: "email", placeholder: "CORREO ELECTRÓNICO" },
   { name: "password", placeholder: "CONTRASEÑA", type: "password" },
   {
@@ -27,8 +28,13 @@ const Register = () => {
   const methods = useForm<SignUp>({
     resolver: zodResolver(signUpSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
+    reValidateMode: "onBlur",
   });
+
+  const { signUp, isPending } = useCreateAccount();
+
+  const onSubmit = methods.handleSubmit(async (data) => await signUp(data));
+
   return (
     <BackgroundImage>
       <View style={styles.container}>
@@ -38,15 +44,15 @@ const Register = () => {
             <InputContainer variant="secondary">
               {fields.map((item) => (
                 <Controller
-                  name={item.name}
                   key={item.name}
+                  name={item.name}
                   render={({ field, fieldState: { error } }) => (
                     <Input
                       placeholder={item.placeholder}
                       onChangeText={field.onChange}
                       value={field.value}
                       error={!!error}
-                      errorMessage={`${error?.message}`}
+                      errorMessage={error?.message ?? ""}
                       secureField={item.type === "password"}
                     />
                   )}
@@ -54,8 +60,9 @@ const Register = () => {
               ))}
               <Button
                 text="REGISTRARSE"
-                handlePress={() => methods.handleSubmit(() => {})}
+                handlePress={onSubmit}
                 variant="secondary"
+                isLoading={isPending}
               />
             </InputContainer>
           </FormProvider>
