@@ -37,9 +37,9 @@ export const useLogin = () => {
     mutationKey: ["login"],
     mutationFn: async (data: SignIn) => login(authRepo)(data),
     onSuccess: async ({ token }) => {
-      await dispatch(fetchUserInfo());
-      dispatch(signIn());
       await saveJWT(token);
+      dispatch(signIn());
+      await dispatch(fetchUserInfo());
       route.push("/(app)/home/");
     },
     onError: (error) => Alert.alert("Error al iniciar sesión"),

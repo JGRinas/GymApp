@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import {
   AppleIcon,
   DummbellIcon,
@@ -10,6 +10,7 @@ import { useAppSelector } from "@config/store";
 
 export default function AppLayout() {
   const profile = useAppSelector((state) => state.AuthSlice.profile);
+  if (!profile) return <Redirect href="/(on-boarding)" />;
   return (
     <Tabs
       screenOptions={{

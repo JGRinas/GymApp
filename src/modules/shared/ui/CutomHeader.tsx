@@ -4,17 +4,19 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { BaseText } from "./Texts";
 import { colors } from "@colors/*";
-import { signOut } from "../../auth/infrastructure/slices";
+import { reset } from "../../auth/infrastructure/slices";
 import { useRouter } from "expo-router";
+import { removeJWT } from "../../auth/infrastructure/token";
 
 const CustomHeader = () => {
   const isLogged = useAppSelector((state) => state.AuthSlice.isLogged),
     dispatch = useAppDispatch(),
     navigation = useRouter();
 
-  const onLogout = () => {
-    dispatch(signOut());
-    navigation.push("/(on-boarding)/");
+  const onLogout = async () => {
+    dispatch(reset());
+    await removeJWT();
+    navigation.replace("/(on-boarding)/");
   };
 
   return (
