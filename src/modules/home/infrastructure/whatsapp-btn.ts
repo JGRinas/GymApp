@@ -1,8 +1,7 @@
 import { Alert, Linking } from "react-native";
 
-export const openWhatsApp = () => {
+export const openWhatsApp = (message: string) => {
   const phoneNumber = "+54379 4560224";
-  const message = "Hola! Quisiera consultar sobre mi plan de entrenamiento.";
   const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
     message
   )}`;

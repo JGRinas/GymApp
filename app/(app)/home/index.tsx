@@ -15,7 +15,11 @@ function WelcomeScreen() {
           <Banner
             icon={"WhatsAppIcon"}
             text="CONSULTAR POR WHATSAPP"
-            onPress={openWhatsApp}
+            onPress={() =>
+              openWhatsApp(
+                "Hola! Quisiera consultar sobre mi plan de entrenamiento."
+              )
+            }
           />
           <Banner text="ACCEDÉ A TU RUTINA" variant="second" />
         </View>
