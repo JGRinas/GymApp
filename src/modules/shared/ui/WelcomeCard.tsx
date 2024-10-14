@@ -4,7 +4,7 @@ import { useAppSelector } from "@config/store";
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-const BASE_URL_GYM_APP = process.env.EXPO_PUBLIC_GYM_APP_UPLOADS_URL;
+const BASE_URL_GYM_APP = process.env.EXPO_PUBLIC_GYM_APP_BASE_URL;
 
 const WelcomeCard = ({
   inHome = true,
