@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  ViewStyle,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { BaseText } from "@shared/ui/Texts";
@@ -13,6 +14,8 @@ interface RoutineCardProps {
   title: string;
   description: string;
   onPress?: (prop?: any) => void;
+  aditionalStyles?: ViewStyle;
+  blurIntensity?: number;
 }
 
 const RoutineCard: React.FC<RoutineCardProps> = ({
@@ -20,13 +23,21 @@ const RoutineCard: React.FC<RoutineCardProps> = ({
   title,
   description,
   onPress,
+  aditionalStyles,
+  blurIntensity = 1000,
 }) => (
   <TouchableOpacity disabled={!onPress} onPress={onPress}>
     <ImageBackground source={{ uri: image }} style={styles.imageBackground}>
-      <View style={styles.overlayContainer}>
-        <BlurView intensity={1000} tint="dark" style={styles.blurContainer}>
+      <View style={[styles.overlayContainer, aditionalStyles]}>
+        <BlurView
+          intensity={blurIntensity}
+          tint="dark"
+          style={styles.blurContainer}
+        >
           <BaseText textStyles={styles.title}>{title}</BaseText>
-          <BaseText textStyles={styles.description}>{description}</BaseText>
+          {description && (
+            <BaseText textStyles={styles.description}>{description}</BaseText>
+          )}
         </BlurView>
       </View>
     </ImageBackground>
