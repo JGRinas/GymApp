@@ -4,8 +4,6 @@ import { useAppSelector } from "@config/store";
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-const BASE_URL_GYM_APP = process.env.EXPO_PUBLIC_GYM_APP_BASE_URL;
-
 const WelcomeCard = ({
   inHome = true,
   onPressImage,
@@ -24,9 +22,7 @@ const WelcomeCard = ({
       >
         <Image
           source={{
-            uri: profile?.photo
-              ? `${BASE_URL_GYM_APP}/${profile?.photo}`
-              : "https://via.placeholder.com/100",
+            uri: profile?.photo ?? "https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png",
           }}
           style={styles.profileImage}
         />
