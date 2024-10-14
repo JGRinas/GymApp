@@ -1,50 +1,96 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 🔧 Cómo Levantar el Proyecto Expo
 
-## Get started
+### 1️⃣ Requisitos Previos
+1. **Node.js**: Asegúrate de tener **Node.js** instalado en tu máquina. [Descargar Node.js](https://nodejs.org/)
+2. **Expo CLI**: Instalar Expo CLI globalmente.
+   ```bash
+   npm install -g expo-cli
+   ```
 
-1. Install dependencies
+### 2️⃣ Instalación del Proyecto
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/JGRinas/GymApp.git
+   cd GymApp
+   ```
 
+2. **Instalar dependencias**:
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Configurar Variables de Entorno**:
+   - Reemplaza el archivo `.env-template` por `.env` en la raíz del proyecto:
 
+4. **Ejecutar el Proyecto en Modo Desarrollo**:
    ```bash
-    npx expo start
+   npm run android
    ```
+   - Esto abrirá el **Metro Bundler** en tu terminal.
+   - Escanea el **QR Code** con la aplicación Expo Go en tu dispositivo móvil o usa un emulador.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📂 Estructura del Proyecto
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+El proyecto sigue la **Clean Architecture**, lo que permite mantener el código organizado y escalable. A continuación, se detalla cada capa:
 
-## Get a fresh project
+### 1️⃣ **Presentation Layer (Capa de Presentación)**
+- **Descripción**: Contiene los componentes de la interfaz de usuario que los usuarios ven e interactúan, como botones, inputs, banners, y contenedores que son utilizados por las pantallas..
 
-When you're ready, run:
+### 2️⃣ **Domain Layer (Capa de Dominio)**
+- **Descripción**: Define la lógica de negocio y las reglas esenciales de la aplicación. Aquí se colocan **entidades**, **casos de uso** e **interfaces**.
 
-```bash
-npm run reset-project
+### 3️⃣ **Application Layer (Capa de Aplicación)**
+- **Descripción**: Maneja la comunicación entre la capa de presentación y el dominio. Aquí se colocan los **servicios** que conectan la lógica de negocio con la interfaz.
+
+### 4️⃣ **Infrastructure Layer (Infraestructura)**
+- **Descripción**: Implementa las conexiones con **APIs externas** y bases de datos. Aquí se encuentran las configuraciones de **repositorios** y la integración con servicios externos.
+
+---
+
+## 📦 Patrón Repositorio
+
+El proyecto implementa el **Patrón Repositorio** para desacoplar la lógica de negocio del acceso a datos. Esto permite que la aplicación cambie la fuente de datos (por ejemplo, de una API a una base de datos local) sin afectar la lógica del dominio.
+
+### Ejemplo de Repositorio:
+```typescript
+//infrastructure/repository.ts
+export default function createExerciseRepository(): ExerciseRepository {
+  return {
+    getAllExercises,
+  };
+}
+
+async function getAllExercises() {
+  const response = await API.EXERCISE.get("/");
+  return response.data;
+}
+
+//domain/repository.ts
+export interface ExerciseRepository {
+  getAllExercises: () => Promise<Exercise[]>;
+}
+
+//application/index.ts
+import { ExerciseRepository } from "../domain/repository";
+
+export function getAllExercises(repository: ExerciseRepository) {
+  return async function () {
+    return await repository.getAllExercises();
+  };
+}
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 📋 Descripción General de la Aplicación
 
-To learn more about developing your project with Expo, look at the following resources:
+Esta aplicación está diseñada para facilitar la interacción entre usuarios y su rutina de entrenamiento en un gimnasio. Los usuarios pueden:
+- **Visualizar y gestionar sus rutinas**.
+- **Buscar ejercicios específicos**.
+- **Ver indicaciones detalladas** de cada ejercicio.
+- **Registrarse y gestionar su cuenta**.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+La aplicación sigue las mejores prácticas de desarrollo utilizando **Expo**, **React Native** y una estructura basada en **Clean Architecture** para garantizar escalabilidad y facilidad de mantenimiento.
