@@ -13,7 +13,7 @@ export function getUserPlan(repository: ProfileRepository) {
 }
 
 export function editProfilePhoto(repository: ProfileRepository) {
-  return async function (photo: string) {
-    return await repository.editProfilePhoto(photo);
+  return async function (formData: FormData) {
+    return await repository.editProfilePhoto(formData);
   };
 }

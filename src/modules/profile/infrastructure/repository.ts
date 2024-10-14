@@ -19,7 +19,11 @@ async function getUserPlan() {
   return response.data;
 }
 
-async function editProfilePhoto() {
-  const response = await API.USER.get(`/profile/photo`);
+async function editProfilePhoto(formData: FormData) {
+  const response = await API.USER.put("/profile/photo", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 }
