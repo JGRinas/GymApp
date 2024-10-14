@@ -36,7 +36,7 @@
 
 El proyecto sigue la **Clean Architecture**, lo que permite mantener el código organizado y escalable. A continuación, se detalla cada capa:
 
-### 1️⃣ **Presentation Layer (Capa de Presentación)**
+### 1️⃣ **UI Layer (Capa de Presentación)**
 - **Descripción**: Contiene los componentes de la interfaz de usuario que los usuarios ven e interactúan, como botones, inputs, banners, y contenedores que son utilizados por las pantallas..
 
 ### 2️⃣ **Domain Layer (Capa de Dominio)**
