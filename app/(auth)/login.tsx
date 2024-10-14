@@ -25,7 +25,7 @@ const Login = () => {
     reValidateMode: "onBlur",
   });
 
-  const { mutateAsync: signIn } = useLogin();
+  const { mutateAsync: signIn, isPending } = useLogin();
 
   const onSubmit = methods.handleSubmit(async (data) => await signIn(data));
 
@@ -52,7 +52,11 @@ const Login = () => {
                   )}
                 />
               ))}
-              <Button text="INICIAR SESIÓN" handlePress={onSubmit} />
+              <Button
+                text="INICIAR SESIÓN"
+                handlePress={onSubmit}
+                isLoading={isPending}
+              />
             </InputContainer>
           </FormProvider>
         </View>

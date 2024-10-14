@@ -1,6 +1,6 @@
-
 import React from "react";
 import {
+  ActivityIndicator,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -16,6 +16,7 @@ interface IButton {
   disabled?: boolean;
   additionalStyles?: ViewStyle | ViewStyle[];
   textStyles?: TextStyle;
+  isLoading?: boolean;
 }
 
 export const Button = ({
@@ -25,6 +26,7 @@ export const Button = ({
   disabled,
   additionalStyles,
   textStyles,
+  isLoading = false,
 }: IButton) => (
   <TouchableOpacity
     style={[
@@ -36,7 +38,11 @@ export const Button = ({
     onPress={handlePress}
     disabled={disabled}
   >
-    <BaseText textStyles={textStyles}>{text}</BaseText>
+    {isLoading ? (
+      <ActivityIndicator size={20} />
+    ) : (
+      <BaseText textStyles={textStyles}>{text}</BaseText>
+    )}
   </TouchableOpacity>
 );
 

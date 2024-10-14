@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Image,
-  StyleSheet,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
+import { View, Image, StyleSheet, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import BackgroundImage from "@shared/ui/BackgroundImage";
 import { useEditPhoto } from "../../../src/modules/profile/infrastructure/hooks/useProfile";
@@ -69,11 +63,11 @@ const EditProfilePhoto = () => {
         )}
         <Button text="Seleccionar Foto" handlePress={pickImage} />
         <View style={{ marginVertical: 10 }}>
-          {isPending ? (
-            <ActivityIndicator size="large" color="#d2ff00" />
-          ) : (
-            <Button text="Subir Foto" handlePress={handleUpload} />
-          )}
+          <Button
+            text="Subir Foto"
+            handlePress={handleUpload}
+            isLoading={isPending}
+          />
         </View>
         {isError && (
           <BaseText textStyles={{ color: colors.ERROR }}>

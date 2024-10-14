@@ -3,13 +3,15 @@ import createAuthRepository from "../repository";
 import { createAccount, login } from "../../application";
 import { SignIn, SignUp } from "../../domain";
 import { saveJWT } from "../token";
-import { useNavigation, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { fetchUserInfo, signIn } from "../slices";
 import { useAppDispatch } from "@config/store";
+import { Alert } from "react-native";
 
 const authRepo = createAuthRepository();
 
 export const useCreateAccount = () => {
+  const route = useRouter();
   const {
     mutateAsync: signUp,
     isPending,
@@ -17,15 +19,18 @@ export const useCreateAccount = () => {
   } = useMutation({
     mutationKey: ["createAccount"],
     mutationFn: async (data: SignUp) => createAccount(authRepo)(data),
-    onSuccess: (data) => console.log(data),
-    onError: (error) => console.error(error),
+    onSuccess: (data) => {
+      route.push({
+        pathname: "/(auth)/login",
+      });
+    },
+    onError: (error) => Alert.alert("Error al crear la cuenta"),
   });
   return { signUp, isPending, isError };
 };
 
 export const useLogin = () => {
-  const navigation = useNavigation(),
-    route = useRouter(),
+  const route = useRouter(),
     dispatch = useAppDispatch();
 
   const { mutateAsync, isPending, isError } = useMutation({
@@ -37,7 +42,7 @@ export const useLogin = () => {
       await saveJWT(token);
       route.push("/(app)/home/");
     },
-    onError: (error) => console.error(error),
+    onError: (error) => Alert.alert("Error al iniciar sesión"),
   });
   return { mutateAsync, isPending, isError };
 };

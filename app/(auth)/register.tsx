@@ -31,7 +31,7 @@ const Register = () => {
     reValidateMode: "onBlur",
   });
 
-  const { signUp } = useCreateAccount();
+  const { signUp, isPending } = useCreateAccount();
 
   const onSubmit = methods.handleSubmit(async (data) => await signUp(data));
 
@@ -62,6 +62,7 @@ const Register = () => {
                 text="REGISTRARSE"
                 handlePress={onSubmit}
                 variant="secondary"
+                isLoading={isPending}
               />
             </InputContainer>
           </FormProvider>
