@@ -3,10 +3,6 @@
 
 ### 1️⃣ Requisitos Previos
 1. **Node.js**: Asegúrate de tener **Node.js** instalado en tu máquina. [Descargar Node.js](https://nodejs.org/)
-2. **Expo CLI**: Instalar Expo CLI globalmente.
-   ```bash
-   npm install -g expo-cli
-   ```
 
 ### 2️⃣ Instalación del Proyecto
 1. **Clonar el repositorio**:
