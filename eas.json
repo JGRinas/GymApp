@@ -1,0 +1,54 @@
+{
+  "cli": {
+    "version": ">= 12.5.2",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_GYM_APP_BASE_URL": "https://gym-app-back-eta.vercel.app",
+        "EXPO_PUBLIC_GYM_APP_API_URL": "https://gym-app-back-eta.vercel.app/api",
+        "EXPO_PUBLIC_PREFIX_AUTH": "auth",
+        "EXPO_PUBLIC_PREFIX_USER": "user",
+        "EXPO_PUBLIC_PREFIX_PLAN": "plans",
+        "EXPO_PUBLIC_PREFIX_ROUTINE": "routines",
+        "EXPO_PUBLIC_PREFIX_EXERCISE": "exercises"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_GYM_APP_BASE_URL": "https://gym-app-back-eta.vercel.app",
+        "EXPO_PUBLIC_GYM_APP_API_URL": "https://gym-app-back-eta.vercel.app/api",
+        "EXPO_PUBLIC_PREFIX_AUTH": "auth",
+        "EXPO_PUBLIC_PREFIX_USER": "user",
+        "EXPO_PUBLIC_PREFIX_PLAN": "plans",
+        "EXPO_PUBLIC_PREFIX_ROUTINE": "routines",
+        "EXPO_PUBLIC_PREFIX_EXERCISE": "exercises"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_GYM_APP_BASE_URL": "https://gym-app-back-eta.vercel.app",
+        "EXPO_PUBLIC_GYM_APP_API_URL": "https://gym-app-back-eta.vercel.app/api",
+        "EXPO_PUBLIC_PREFIX_AUTH": "auth",
+        "EXPO_PUBLIC_PREFIX_USER": "user",
+        "EXPO_PUBLIC_PREFIX_PLAN": "plans",
+        "EXPO_PUBLIC_PREFIX_ROUTINE": "routines",
+        "EXPO_PUBLIC_PREFIX_EXERCISE": "exercises"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
