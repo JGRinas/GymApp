@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { UserProfile } from "../../domain";
-import { getProfile } from "../../application";
-import createAuthRepository from "../repository";
+import { UserProfile } from "../../../profile/domain";
+import createProfileRepository from "../../../profile/infrastructure/repository";
+import { getProfile } from "../../../profile/application";
 
 interface AuthState {
   isLogged: boolean;
@@ -25,48 +25,27 @@ const AuthSlice = createSlice({
     },
     signOut: (state) => {
       state.isLogged = false;
+      state.profile = undefined;
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchUserInfo.fulfilled, (state, action) => {
-        if (action.payload) state.profile = action.payload;
-      })
-      .addCase(fetchLogoutUser.fulfilled, (state) => {
-        state.profile = undefined;
-        state.isLogged = false;
-      });
+    builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
+      if (action.payload) state.profile = action.payload;
+    });
   },
 });
 
-const authRepository = createAuthRepository();
+const profileRepository = createProfileRepository();
 
 // Async Thunks
 export const fetchUserInfo = createAsyncThunk("user/fechUserData", async () => {
   try {
-    const response = await getProfile(authRepository)();
+    const response = await getProfile(profileRepository)();
     return response;
   } catch {
-    //Unable to get user Info
     console.error("Unable to get profile");
   }
 });
-
-export const fetchLogoutUser = createAsyncThunk(
-  "user/fechLogoutUser",
-  async () => {
-    try {
-      console.log("Log ~ response:");
-    } catch {
-      console.error("Unable to logout");
-    }
-  }
-);
-
-// Selectors
-export const selectIsLogged = (state: { Auth: AuthState }) =>
-  state.Auth.isLogged;
-export const selectProfile = (state: { Auth: AuthState }) => state.Auth.profile;
 
 export const { reset, signIn, signOut } = AuthSlice.actions;
 

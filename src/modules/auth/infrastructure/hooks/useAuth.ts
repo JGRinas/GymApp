@@ -29,13 +29,13 @@ export const useLogin = () => {
     dispatch = useAppDispatch();
 
   const { mutateAsync, isPending, isError } = useMutation({
-    mutationKey: ["createAccount"],
+    mutationKey: ["login"],
     mutationFn: async (data: SignIn) => login(authRepo)(data),
     onSuccess: async ({ token }) => {
       await dispatch(fetchUserInfo());
       dispatch(signIn());
       await saveJWT(token);
-      route.push("/(app)/home");
+      route.push("/(app)/home/");
     },
     onError: (error) => console.error(error),
   });
