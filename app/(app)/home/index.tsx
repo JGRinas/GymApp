@@ -4,8 +4,10 @@ import PlanCard from "@shared/ui/PlanCard";
 import WelcomeCard from "@shared/ui/WelcomeCard";
 import { StyleSheet, View } from "react-native";
 import { openWhatsApp } from "../../../src/modules/home/infrastructure/whatsapp-btn";
+import { useRouter } from "expo-router";
 
 function WelcomeScreen() {
+  const navigation = useRouter();
   return (
     <BackgroundImage source="Background2">
       <View style={styles.container}>
@@ -21,7 +23,11 @@ function WelcomeScreen() {
               )
             }
           />
-          <Banner text="ACCEDÉ A TU RUTINA" variant="second" />
+          <Banner
+            text="ACCEDÉ A TU RUTINA"
+            variant="second"
+            onPress={() => navigation.push("/(app)/routine/")}
+          />
         </View>
       </View>
     </BackgroundImage>
